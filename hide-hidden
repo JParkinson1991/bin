@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# Hides hidden files
+
+defaults write com.apple.Finder AppleShowAllFiles false
+killall Finder

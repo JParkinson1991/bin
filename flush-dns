@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Flushes DNS for MAC's with modern operating systems (MacOS || OSX >= 12)
+
+sudo killall -HUP mDNSResponder;sudo killall mDNSResponderHelper;sudo dscacheutil -flushcache

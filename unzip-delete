@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# Unzips and deletes all .zip files in a given
+#
+# Usage: unzip-delete <path>
+
+find "$1" -name "*.zip" -print0 | while read -d $'\0' file
+do
+    unzip "$file" -d $(dirname "${file}")
+ 	rm "$file"
+done

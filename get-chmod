@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+# Returns the file mode octal for the given file
+
+stat -f '%A %N' $@
