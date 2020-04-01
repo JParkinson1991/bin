@@ -4,14 +4,14 @@
 # 
 # Requirments: Google Chrome
 #
-# Run this script without arguments to trigger default state
-#     Simple headless instance with remote debugging enabled
-#     Debug address/port can be set using environment variables
-#         Address: $CHROME_DEBUG_ADDRESS
-#         Port:    $CHROME_DEBUG_PORT
+# Run in default mode, open/visible browser, environment defined address/port
+# $ google-chrome
 #
-# If this script is passed any arguments they will blindy be 
-# passed to google chrome
+# Run in default headless mode, environment defined address/port
+# $ google-chrome headless
+#
+# Run as standard, all arguments passed to this script forward to executable
+# $ google-chrome [arguments]
 
 
 if [[ ! -f "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" ]]; then
@@ -19,7 +19,7 @@ if [[ ! -f "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" ]]; th
 	exit
 fi
 
-if [[ $# -eq 0 ]] ; then
+if [[ $# -eq 0 ]] || [[ $# -eq 1 && "$*" == "headless" ]]; then
 	debugAddress=${CHROME_DEBUG_ADDRESS:-0.0.0.0}
 	debugPort=${CHROME_DEBUG_PORT:-9222}
 
@@ -28,7 +28,12 @@ if [[ $# -eq 0 ]] ; then
 	echo "Debug Port: ${debugPort}"
 	echo ""
 
-	/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-gpu --headless --remote-debugging-address=0.0.0.0 --remote-debugging-port=9222
+	args="--remote-debugging-address=$debugAddress --remote-debugging-port=$debugPort"
+	if [[ "$*" == "headless" ]]; then
+		args="$args --disable-gpu --headless"
+	fi
+
+	/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome $args
 else
 	/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome $@
 fi
