@@ -4,12 +4,12 @@ A collection of unsorted, unorganised, possibly helpful bash scripts for MacOS
 
 ## Installing
 
-Clone the repository and it's directory to $PATH
+Clone the repository and it's `bin` directory to $PATH
 
 ```
-# If installation directory is: /downloads/bin
+# If installation directory is: /downloads/jparkinson1991-bin
 
-PATH="/downloads/bin:$PATH"
+PATH="/downloads/jparkinson1991-bin/bin:$PATH"
 ```
 
 ## Usage 
